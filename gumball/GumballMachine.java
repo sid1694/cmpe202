@@ -1,32 +1,29 @@
-public class GumballMachine
-{
+public class GumballMachine {
 
-    private int num_gumballs;
-    private boolean has_quarter;
-
-    public GumballMachine( int size )
-    {
-        // initialise instance variables
-        this.num_gumballs = size;
-        this.has_quarter = false;
-    }
-
-    public void insertQuarter(int coin)
-    {
-        if ( coin == 25 )
-            this.has_quarter = true ;
-        else 
-            this.has_quarter = false ;
-    }
+    private int numGumballs;
+    private boolean hasQuarter;
+    private int cost;
+    private int total;
+    private String type;
     
-    public void turnCrank()
-    {
-    	if ( this.has_quarter )
+ public GumballMachine( int size, int cost, String type){
+    	
+        this.numGumballs = size;
+        this.hasQuarter = false;
+        this.cost = cost;
+        this.type = type;
+        this.total = 0;
+        
+        }
+    
+public void turnCrank(){
+    	
+    	if ( this.hasQuarter || (this.total >= this.cost) )
     	{
-    		if ( this.num_gumballs > 0 )
+    		if ( this.numGumballs > 0 )
     		{
-    			this.num_gumballs-- ;
-    			this.has_quarter = false ;
+    			this.numGumballs-- ;
+    			this.hasQuarter = false ;
     			System.out.println( "Thanks for your quarter.  Gumball Ejected!" ) ;
     		}
     		else
@@ -39,4 +36,23 @@ public class GumballMachine
     		System.out.println( "Please insert a quarter" ) ;
     	}        
     }
+
+   
+
+    public void insertQuarter(int coin){
+    	
+        if ( coin == 25 && this.cost == 25 && this.type.equals("Quarter") )
+            this.hasQuarter = true ;
+        else 
+            if( coin == 25 && cost == 50 && type.equals("Quarter") )
+            total += coin ;
+        else 
+            if( cost == 50 && !type.equals("Quarter") )
+                total += coin ;
+        else 
+        	this.hasQuarter = false ;
+        
+    }
+    
+  
 }
